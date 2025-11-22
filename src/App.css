@@ -1,0 +1,198 @@
+/* Reset para asegurar una base limpia */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fuentes adicionales */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: center-box;
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif; /* Fuente general */
+}
+
+/* Fondo de la aplicación con degradado dinámico */
+.min-h-screen {
+  position: relative;
+  overflow: hidden; 
+  background: linear-gradient(
+    45deg,
+    #1a202c,
+    #2d3748,
+    #4a5568,
+    #2d3748,
+    #1a202c
+  );
+  background-size: 400% 400%;
+  animation: backgroundPan 15s ease infinite;
+}
+
+/* Animación del degradado de fondo */
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilo para el título MonedaFlow (MODIFICADO para la animación de color) */
+.monedaflow-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem;
+  /* El degradado inicial */
+  background: linear-gradient(
+    45deg,
+    #0dff9a,
+    #00bcd4,
+    #007bff
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.6));
+  transition: transform 0.3s ease;
+  
+  /* Animación de cambio de color */
+  animation: titleColorChange 10s ease infinite;
+}
+
+/* Keyframes para el cambio de color del título */
+@keyframes titleColorChange {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.6)); /* Verde claro */
+    background-image: linear-gradient(45deg, #0dff9a, #00bcd4, #007bff);
+  }
+  33% {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)); /* Púrpura/Magenta */
+    background-image: linear-gradient(45deg, #ff00ff, #ff8000, #ff00ff);
+  }
+  66% {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.6)); /* Amarillo */
+    background-image: linear-gradient(45deg, #ffff00, #ff8c00, #ff4500);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.6)); /* Vuelve al verde */
+    background-image: linear-gradient(45deg, #0dff9a, #00bcd4, #007bff);
+  }
+}
+
+
+.monedaflow-title:hover {
+  transform: scale(1.05);
+}
+
+
+/* Ajustes para el Header (Se mantiene) */
+.bg-slate-900 {
+  background-color: rgba(15, 23, 42, 0.9); /* Fondo del header más sólido */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 10;
+  position: relative;
+}
+
+/* Ajustes para los componentes principales (Se mantiene) */
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco casi sólido */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 5;
+}
+
+/* Estilo para las casillas de entrada (TAMAÑO REDUCIDO UN POCO) */
+input[type="number"],
+select {
+  padding: 1rem !important; /* Reducido de 1.25rem a 1rem */
+  font-size: 1.1rem !important; /* Reducido de 1.2rem a 1.1rem */
+  border-radius: 0.6rem !important; /* Un poco menos redondeado */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los botones de las pestañas (Se mantiene) */
+.nav-button {
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button.active {
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.5);
+}
+
+/* --- Animación de Billetes (Se mantiene) --- */
+
+/* Contenedor de la animación para posicionamiento absoluto */
+.bill-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ignorar clics */
+  overflow: hidden; /* Aseguramos que los billetes no salgan del header */
+}
+
+.bill-icon {
+  position: absolute;
+  font-size: 3rem; /* Tamaño del emoji */
+  opacity: 0.8;
+  animation: floatRotate 15s infinite ease-in-out;
+}
+
+@keyframes floatRotate {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(10%, -10%) rotate(45deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(20%, 5%) rotate(0deg);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translate(10%, 10%) rotate(-45deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.5;
+  }
+}
+
+/* Posicionamiento y retraso para cada billete */
+#bill-1 {
+  top: 20%;
+  left: 5%;
+  animation-duration: 18s;
+  animation-delay: 0s;
+}
+
+#bill-2 {
+  top: 60%;
+  right: 10%;
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+#bill-3 {
+  bottom: 10%;
+  left: 30%;
+  animation-duration: 16s;
+  animation-delay: -10s;
+}

@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Conversion {
+  id        Int      @id @default(autoincrement())
+  from      String
+  to        String
+  amount    Float
+  result    Float
+  createdAt DateTime @default(now())
+}
