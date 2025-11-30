@@ -1,18 +1,513 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="MonedaFlow - Conversor de Divisas y Distancias"
-    />
-    <title>MonedaFlow</title>
-  </head>
-  <body>
-    <noscript>Necesitas habilitar JavaScript para ejecutar esta app.</noscript>
-    <div id="root"></div>
-  </body>
+<html>
+<head>
+    <title>MonedaFlow - Elegance Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(ellipse at top left, rgba(255, 215, 0, 0.08), transparent 50%),
+                linear-gradient(135deg, #0a0f1c 0%, #1a2332 50%, #0d1117 100%);
+            color: #f8f9fa;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Textura de mármol cósmico */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 215, 0, 0.02) 35px, rgba(255, 215, 0, 0.02) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.01) 35px, rgba(255, 255, 255, 0.01) 70px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Partículas doradas mejoradas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.9), transparent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float-up 18s infinite;
+            box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* Destellos estelares aleatorios */
+        .starburst {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3;
+            animation: burst 3s infinite;
+        }
+
+        @keyframes burst {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 4;
+        }
+
+        /* Header con efecto de respiración */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 30px rgba(255, 215, 0, 0.4);
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Tarjetas glassmorphism premium */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2.5rem auto;
+            max-width: 650px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 0 25px rgba(255, 215, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 45px rgba(0, 0, 0, 0.5),
+                inset 0 0 35px rgba(255, 215, 0, 0.18);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        /* Efecto de brillo en bordes */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .glass-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Títulos de sección mejorados */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1.8rem;
+            color: #ffd700;
+            text-align: center;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '✦';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Inputs de lujo */
+        .input-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #c9d1d9;
+            font-size: 0.95rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 12px;
+            color: #f8f9fa;
+            font-size: 1.05rem;
+            transition: all 0.4s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Botón de lujo mejorado */
+        .luxury-btn {
+            display: block;
+            width: 100%;
+            padding: 1.2rem 2.5rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(90deg, #1a2332, #2d3748);
+            border: 1px solid #ffd700;
+            border-radius: 50px;
+            color: #ffd700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .luxury-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .luxury-btn:hover::before {
+            left: 100%;
+        }
+
+        .luxury-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.35);
+            background: linear-gradient(90deg, #2d3748, #1a2332);
+        }
+
+        /* Resultados con efecto de brillo mejorado */
+        .result-display {
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 1.8rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border: 1px dashed rgba(255, 215, 0, 0.4);
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-display::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mensaje subliminal rotativo */
+        .subliminal {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: rgba(255, 215, 0, 0.25);
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: subliminal-rotate 15s infinite;
+            z-index: 10;
+        }
+
+        @keyframes subliminal-rotate {
+            0%, 85%, 100% { opacity: 0; }
+            86% { opacity: 0.25; color: rgba(255, 215, 0, 0.25); }
+            87% { opacity: 0; }
+            88% { opacity: 0.2; color: rgba(255, 255, 255, 0.2); }
+            89% { opacity: 0; }
+            90% { opacity: 0.15; color: rgba(144, 238, 144, 0.15); }
+            91% { opacity: 0; }
+        }
+
+        /* Efecto de brillo global */
+        .global-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            border: 1px solid transparent;
+            box-shadow: 
+                inset 0 0 120px rgba(255, 215, 0, 0.08),
+                0 0 120px rgba(255, 215, 0, 0.04);
+            animation: global-pulse 10s infinite alternate;
+        }
+
+        @keyframes global-pulse {
+            0% { box-shadow: inset 0 0 100px rgba(255, 215, 0, 0.05), 0 0 100px rgba(255, 215, 0, 0.02); }
+            100% { box-shadow: inset 0 0 150px rgba(255, 215, 0, 0.12), 0 0 150px rgba(255, 215, 0, 0.06); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas doradas -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Destellos estelares -->
+    <div id="starbursts"></div>
+    
+    <!-- Efecto de brillo global -->
+    <div class="global-glow"></div>
+    
+    <!-- Contenedor principal -->
+    <div class="container">
+        <header>
+            <h1 class="logo">MONEDAFLOW</h1>
+        </header>
+        
+        <!-- Tarjeta de conversión de divisas -->
+        <div class="glass-card">
+            <h2 class="section-title">Cambio de Divisas</h2>
+            <div class="input-group">
+                <label for="amount">Monto</label>
+                <input type="number" id="amount" class="input-field" placeholder="Ingrese monto">
+            </div>
+            <div class="input-group">
+                <label for="from">De</label>
+                <select id="from" class="input-field">
+                    <option value="USD">USD - Dólar Americano</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - Libra Esterlina</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="to">A</label>
+                <select id="to" class="input-field">
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="USD">USD - Dólar Americano</option>
+                    <option value="GBP">GBP - Libra Esterlina</option>
+                </select>
+            </div>
+            <button class="luxury-btn">CONVERTIR</button>
+            <div class="result-display">0.86 EUR</div>
+        </div>
+        
+        <!-- Tarjeta de conversión de distancia -->
+        <div class="glass-card">
+            <h2 class="section-title">Conversor de Distancia</h2>
+            <div class="input-group">
+                <label for="distance">Distancia</label>
+                <input type="number" id="distance" class="input-field" placeholder="Ingrese distancia">
+            </div>
+            <div class="input-group">
+                <label for="from-unit">De</label>
+                <select id="from-unit" class="input-field">
+                    <option value="km">Kilómetros</option>
+                    <option value="mi">Millas</option>
+                    <option value="m">Metros</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="to-unit">A</label>
+                <select id="to-unit" class="input-field">
+                    <option value="mi">Millas</option>
+                    <option value="km">Kilómetros</option>
+                    <option value="m">Metros</option>
+                </select>
+            </div>
+            <button class="luxury-btn">CONVERTIR</button>
+            <div class="result-display">0.00 mi</div>
+        </div>
+    </div>
+    
+    <!-- Mensaje subliminal rotativo -->
+    <div class="subliminal">ELEGANCE IN MOTION</div>
+
+    <script>
+        // Generar partículas doradas mejoradas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 18 + 's';
+                particle.style.animationDuration = (18 + Math.random() * 12) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Generar destellos estelares aleatorios
+        function createStarbursts() {
+            const container = document.getElementById('starbursts');
+            
+            setInterval(() => {
+                const starburst = document.createElement('div');
+                starburst.className = 'starburst';
+                starburst.style.left = Math.random() * 100 + '%';
+                starburst.style.top = Math.random() * 100 + '%';
+                starburst.style.animationDelay = Math.random() * 3 + 's';
+                
+                container.appendChild(starburst);
+                
+                setTimeout(() => starburst.remove(), 3000);
+            }, 2000);
+        }
+        
+        // Inicializar efectos
+        window.addEventListener('load', () => {
+            createParticles();
+            createStarbursts();
+        });
+        
+        // Efecto de brillo en inputs
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
 </html>

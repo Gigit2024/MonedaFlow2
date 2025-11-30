@@ -1,11 +1,12 @@
 -- CreateTable
-CREATE TABLE "Conversion" (
-    "id" SERIAL NOT NULL,
-    "from" TEXT NOT NULL,
-    "to" TEXT NOT NULL,
-    "amount" DOUBLE PRECISION NOT NULL,
-    "result" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "Conversion_pkey" PRIMARY KEY ("id")
+CREATE TABLE "conversions" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "type" TEXT NOT NULL,
+    "fromValue" REAL NOT NULL,
+    "fromUnit" TEXT NOT NULL,
+    "toValue" REAL NOT NULL,
+    "toUnit" TEXT NOT NULL,
+    "result" REAL NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
 );

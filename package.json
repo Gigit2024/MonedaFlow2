@@ -2,34 +2,45 @@
   "name": "monedaflow",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "lucide-react": "^0.290.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.0"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "db:push": "prisma db push"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.6.0",
+    "@radix-ui/react-select": "^2.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
+    "lucide-react": "^0.293.0",
+    "next": "^16.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "prisma": "^5.22.0"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@types/next": "^8.0.7",
+    "@types/node": "^20.8.10",
+    "@types/react": "^18.2.35",
+    "@types/react-dom": "^18.2.14",
+    "autoprefixer": "^10.4.16",
+    "baseline-browser-mapping": "^2.8.32",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "13.5.6",
+    "postcss": "^8.4.31",
+    "prisma": "^5.6.0",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
   }
 }
