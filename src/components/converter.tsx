@@ -1,8 +1,8 @@
-'use client'
+
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { CurrencyExchange, Route, ArrowRight } from 'lucide-react'
+import { Moon } from 'framer-motion'
+import { Moon, ArrowRight, Currency, Route } from 'lucide-react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
