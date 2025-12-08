@@ -1,29 +1,29 @@
-# version: '3.8' # Versión de Compose (opcional pero recomendada)
+version: '3.8'
 
 services:
-  db:
-    image: postgres:16-alpine # Imagen de PostgreSQL ligera
-    container_name: monedaflow_db
-    restart: always
-    environment:
-      # Estos valores DEBEN coincidir con los de tu archivo .env
-      POSTGRES_USER: monedaflow_user
-      POSTGRES_PASSWORD: monedaflow_pass
-      POSTGRES_DB: monedaflow
-    
-    # Mapeo de puertos: 
-    # Expone el puerto 5432 del contenedor al puerto 5432 del host.
-    # Esto es CRUCIAL para que tu app local (npm run dev) se conecte usando 'localhost:5432'.
+  app:
+    build: .
     ports:
-      - "5433:5432"
-      
-    # Volumen: Persistencia de datos
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=tu_usuario
+      - DB_PASSWORD=tu_contraseña
+      - DB_NAME=monedaflowdb
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=tu_usuario
+      - POSTGRES_PASSWORD=tu_contraseña
+      - POSTGRES_DB=monedaflowdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
 
-  # NOTA: No incluimos un servicio 'app' aquí, ya que ejecutas tu aplicación 
-  # directamente en el host (npm run dev), lo cual es más rápido para el desarrollo.
-
-# Definición de volúmenes para persistencia
 volumes:
   postgres_data:

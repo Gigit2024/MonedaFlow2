@@ -1,25 +1,17 @@
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
-  previewFeatures =["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["public", "monedaflow"] 
-    }
+}
 
-model Conversion {
-  id          String   @id @default(cuid())
-  type        String   // 'currency' | 'distance'
-  fromValue   Float
-  fromUnit    String
-  toValue     Float
-  toUnit      String
-  result      Float
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("conversions")
-  @@schema("monedaflow")  // Especificar el esquema
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
